@@ -28,6 +28,14 @@
 		"@types/node-fetch": "^2.5.12",
 		"@types/prettier": "^2.3.2"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/prokopschield/nswebdown.git"
+	},
+	"bugs": {
+		"url": "https://github.com/prokopschield/nswebdown/issues"
+	},
+	"homepage": "https://github.com/prokopschield/nswebdown#readme",
 	"keywords": [],
 	"license": "GPL-3.0-or-later",
 	"directories": {
