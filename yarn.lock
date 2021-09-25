@@ -448,10 +448,10 @@ prettier@^2.4.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
   integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
 
-ps-std@^0.1.0-8:
-  version "0.1.0-8"
-  resolved "https://registry.yarnpkg.com/ps-std/-/ps-std-0.1.0-8.tgz#5c99454928088349cc2a028ace9b5e5ce18003b8"
-  integrity sha512-3sJ3aWMupN0xJPvGrcQg4EuZ5ZGbQ1ko1ZBPdo3a9DglX1nDnLAolRbSsQIJWQrgtjnU5AoioynLftF+2tSpSw==
+ps-std@^0.1.0-11:
+  version "0.1.0-11"
+  resolved "https://registry.yarnpkg.com/ps-std/-/ps-std-0.1.0-11.tgz#dffd92c6c89806d5bfac6248905257cbfdb0ccc6"
+  integrity sha512-hX6uYq0gt0Oj37sJa4G/HITwLyquh9heGqLl5vS7PWtyUbYyQhLPBQ19Ecf3bYw30w4lItpDig20JBtuHTatow==
 
 psl@^1.1.33:
   version "1.8.0"
