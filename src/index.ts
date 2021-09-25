@@ -14,6 +14,23 @@ const DOMPurify = createDOMPurify(new JSDOM('').window as any as Window);
 
 const grabbed = new Set<string>();
 
+const later = new Queue();
+
+function grab_later(cb: () => void) {
+	return void later.promise.then(async () => {
+		cb();
+		await clock.promise.then(() => clock.next_async());
+		if (later.working === true) {
+			if (clock.queue.length) {
+				await clock.promise.then(() => clock.next_async());
+			}
+			if (later.working === true) {
+				later.next_async();
+			}
+		}
+	});
+}
+
 export async function grab(
 	uri: string | URL,
 	outdir: string = 'public',
@@ -55,12 +72,19 @@ export async function grab(
 					const relement = element as HTMLImageElement;
 					const rurl = new URL(relement.src, url);
 					const rfpath = uri2path(rurl);
-					if (!fs.exists(rfpath, outdir, false) && !grabbed.has(rfpath)) {
+					if (
+						!fs.exists(rfpath, outdir, false) &&
+						!fs.exists(rfpath, outdir, true) &&
+						!grabbed.has(rfpath)
+					) {
 						logger(`Queueing up resource ${rurl}`);
 						grabbed.add(rfpath);
 						awaited_resources.push(grab(rurl, outdir, logger));
 					}
-					relement.src = path.relative(path.resolve(fpath, '..'), rfpath);
+					relement.src = path.relative(
+						path.resolve(fpath, '..'),
+						rfpath
+					);
 				}
 			}
 			await Promise.all(awaited_resources);
@@ -76,9 +100,12 @@ export async function grab(
 						if (!grabbed.has(rfpath)) {
 							logger(`Queueing up page ${rurl}`);
 							grabbed.add(rfpath);
-							grab(rurl, outdir, logger, url);
+							grab_later(() => grab(rurl, outdir, logger, url));
 						}
-						relement.href = path.relative(path.resolve(fpath, '..'), rfpath);
+						relement.href = path.relative(
+							path.resolve(fpath, '..'),
+							rfpath
+						);
 					}
 				}
 			}
