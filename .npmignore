@@ -1,4 +1,5 @@
 download/
+downloaded/
 node_modules/
 src/
 tsconfig.json
