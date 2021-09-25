@@ -14,7 +14,7 @@ export function uri2path(url: URL, is_html: boolean = false) {
 		)
 	);
 	if (is_html && !rel.endsWith('.html')) {
-		if (url.toString().endsWith('/')) {
+		if (!url.pathname || url.pathname.endsWith('/')) {
 			return `${rel}/index.html`;
 		} else {
 			return `${rel}.html`;
